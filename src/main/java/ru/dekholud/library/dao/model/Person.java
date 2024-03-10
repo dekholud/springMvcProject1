@@ -1,11 +1,13 @@
 package ru.dekholud.library.dao.model;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +19,7 @@ public class Person {
 
     @NotEmpty(message = "Name should not be empty!")
     @Size(min = 2, message = "FIO should be bigger then 2 symbols!")
-    @UniqueElements(message = "Name should be unique")
-    @Pattern(regexp = "^[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}(-[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,})? [А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}(-[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,})? [А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}$", message = "Wrong fio format")
+    //@Pattern(regexp = "^[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}(-[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,})? [А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}(-[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,})? [А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}$", message = "Wrong fio format")
     private String fio;
 
     @NotNull

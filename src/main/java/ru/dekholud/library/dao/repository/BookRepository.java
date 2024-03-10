@@ -12,6 +12,15 @@ import static ru.dekholud.library.dao.sql.Query.*;
 
 @Component
 public class BookRepository {
+    /**
+     TODO
+     сделать нормальную валидацию полей
+     задействовать dto
+     отрефакторить dao
+     решить проблему с update у book
+     убрать warnings
+     */
+
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -19,21 +28,21 @@ public class BookRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Book> findAllBooks() {
+    public List<Book> findAll() {
         return jdbcTemplate.query(SELECT_ALL_BOOKS, new BookMapper());
     }
 
-    public Book findBookById(int id) {
+    public Book findById(int id) {
         return jdbcTemplate.query(SELECT_BOOK_BY_ID, new Object[]{id}, new BookMapper())
                 .stream().findAny().orElse(null);
     }
 
-    public void deleteBookById(int id) {
+    public void deleteById(int id) {
         jdbcTemplate.update(DELETE_BOOK_BY_ID, id);
     }
 
     public void save(Book book) {
-        jdbcTemplate.update(ADD_BOOK, book.getName(), book.getAuthor(), book.getYear(), book.getPersonId());
+        jdbcTemplate.update(ADD_BOOK, book.getName(), book.getAuthor(), book.getYear(), null);
     }
 
     public void update(Book book) {
@@ -43,6 +52,5 @@ public class BookRepository {
     public Book add() {
         return new Book();
     }
-
 
 }

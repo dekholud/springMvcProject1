@@ -19,16 +19,16 @@ public class PersonRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Person> findAllPerson() {
+    public List<Person> findAll() {
         return jdbcTemplate.query(SELECT_ALL_PERSONS, new PersonMapper());
     }
 
-    public Person findPersonById(int id) {
+    public Person findById(int id) {
         return jdbcTemplate.query(SELECT_PERSON_BY_ID, new Object[]{id}, new PersonMapper())
                 .stream().findAny().orElse(null);
     }
 
-    public void deletePersonById(int id) {
+    public void deleteById(int id) {
         jdbcTemplate.update(DELETE_PERSON_BY_ID, id);
     }
 

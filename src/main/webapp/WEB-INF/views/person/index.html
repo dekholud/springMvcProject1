@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+</head>
+
+<body>
+
+    <div th:each="curPerson : ${people}">
+            <a th:href="@{/people/{id}(id=${curPerson.id})}"
+               th:text="'ФИО: ' + ${curPerson.fio} + ', Год рождения: ' + ${curPerson.year_of_birth}">
+            </a>
+            <br/>
+    </div>
+    <br/>
+    <hr />
+    <a th:href="@{/people/new}" th:text="Добавить">New:</a>
+
+</body>
+
+</html>
