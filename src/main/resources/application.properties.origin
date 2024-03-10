@@ -1,0 +1,4 @@
+db.url=jdbc:example://localhost:port/db
+db.driver.class=org.example.Driver
+db.username=username
+db.password=password
