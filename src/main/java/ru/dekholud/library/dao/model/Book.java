@@ -16,18 +16,17 @@ import lombok.Setter;
 public class Book {
     
     private int id;
-    
-    @NotEmpty(message = "Book Name should not be empty!")
-    @Size(min = 2, message = "Name should be bigger then 2 symbols!")
+
+    @NotEmpty(message = "Наименование книги не должно быть пустым")
+    @Size(min = 2, message = "Наименование книги должно содержать минимум 2 символа")
     private String name;
     
-    @NotEmpty(message = "Author name should not be empty!")
-    @Size(min = 2, message = "Author name should be bigger then 2 symbols!")
+    @NotEmpty(message = "Имя автора не должно быть пустым")
+    @Size(min = 2, message = "Имя автора должно содержать минимум 2 символа")
     private String author;
 
-    @NotNull
-    @Min(value = 0, message = "Value should be bigger then zero")
-    //@Max(value = Year.now().getValue(), message = "Value should be less then ")
+    @NotNull(message = "Год издания не может быть пустым")
+    @Min(value = 0, message = "Год должен быть больше нуля")
     private int year;
     
     private int personId;

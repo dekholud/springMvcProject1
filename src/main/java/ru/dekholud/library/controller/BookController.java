@@ -8,12 +8,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.dekholud.library.dao.model.Book;
 import ru.dekholud.library.dao.repository.BookRepository;
+import ru.dekholud.library.dao.validator.BookValidator;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/books")
 public class BookController {
     private final BookRepository bookRepository;
+    private final BookValidator bookValidator;
 
     @GetMapping()
     public String findAllBooks(Model model) {
@@ -35,6 +37,7 @@ public class BookController {
 
     @PostMapping()
     public String saveBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+        bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
             return "book/new";
         }
@@ -50,6 +53,7 @@ public class BookController {
 
     @PatchMapping("/modify")
     public String modifyBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+        bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
             return "book/edit";
         }

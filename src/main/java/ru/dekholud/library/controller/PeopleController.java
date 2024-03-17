@@ -8,12 +8,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.dekholud.library.dao.model.Person;
 import ru.dekholud.library.dao.repository.PersonRepository;
+import ru.dekholud.library.dao.validator.PersonValidator;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/people")
 public class PeopleController {
     private final PersonRepository personRepository;
+    private final PersonValidator personValidator;
 
     @GetMapping()
     public String findAllPerson(Model model) {
@@ -35,6 +37,7 @@ public class PeopleController {
 
     @PostMapping()
     public String savePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "person/new";
         }
@@ -50,6 +53,7 @@ public class PeopleController {
 
     @PatchMapping("/modify")
     public String modifyPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "person/edit";
         }

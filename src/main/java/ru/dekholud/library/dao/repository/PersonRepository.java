@@ -24,7 +24,12 @@ public class PersonRepository {
     }
 
     public Person findById(int id) {
-        return jdbcTemplate.query(SELECT_PERSON_BY_ID, new Object[]{id}, new PersonMapper())
+        return jdbcTemplate.query(SELECT_PERSON_BY_ID, new PersonMapper(), id)
+                .stream().findAny().orElse(null);
+    }
+
+    public Person findByFio(String fio) {
+        return jdbcTemplate.query(SELECT_PERSON_BY_FIO, new PersonMapper(), fio)
                 .stream().findAny().orElse(null);
     }
 
@@ -33,7 +38,7 @@ public class PersonRepository {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update(ADD_PERSON, person.getFio(), person.getYear_of_birth());
+        jdbcTemplate.update(INSERT_PERSON, person.getFio(), person.getYear_of_birth());
     }
 
     public void update(Person person) {

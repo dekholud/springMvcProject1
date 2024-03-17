@@ -9,6 +9,7 @@
 <body>
 <form th:action="@{/books/modify}" th:method="PATCH" th:object="${book}">
     <label for="id"></label><input hidden="hidden" id="id" th:field="*{id}" th:type="text">
+    <label for="person_id"></label><input hidden="hidden" id="person_id" th:field="*{personId}" th:type="text">
     <label for="name">Наименование: </label>
     <input id="name" th:field="*{name}" th:type="text">
     <div style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')} ">Name error:</div>

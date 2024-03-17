@@ -17,13 +17,11 @@ public class Person {
 
     private int id;
 
-    @NotEmpty(message = "Name should not be empty!")
-    @Size(min = 2, message = "FIO should be bigger then 2 symbols!")
-    //@Pattern(regexp = "^[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}(-[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,})? [А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}(-[А-ЩЄЮІЇЯ][а-щьєюіїя']{1,})? [А-ЩЄЮІЇЯ][а-щьєюіїя']{1,}$", message = "Wrong fio format")
+    @NotEmpty(message = "Имя не должно быть пустым")
+    @Size(min = 2, message = "Имя должно содержать не менее 2х символов")
     private String fio;
 
     @NotNull
-    @Min(value = 1900, message = "Value should be bigger then 1900")
-    //@Max(value = Year.now().getValue(), message = "Value should be less then ")
+    @Min(value = 1900, message = "Год рождения должен быть выше чем 1900")
     private int year_of_birth;
 }
